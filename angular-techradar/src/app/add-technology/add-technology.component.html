@@ -1,0 +1,33 @@
+<form id="technology-form">
+  <h1>Add a technology</h1>
+  <div class="grid">
+    <label for="name">Name
+      <input type="text" name="name" id="name" required>
+    </label>
+  </div>
+  <label for="category">
+    Category
+    <select name="category" id="category">
+      <option value="">--Please choose a category--</option>
+      <option value="Tools">Tools</option>
+      <option value="Platforms">Platforms</option>
+      <option value="Frameworks">Frameworks</option>
+      <option value="Techniques">Techniques</option>
+    </select>
+  </label>
+  <label for="ring">Ring
+    <select name="ring" id="ring">
+      <option value="">--Please choose a category--</option>
+      <option value="Assess">Assess</option>
+      <option value="Trial">Trial</option>
+      <option value="Adopt">Adopt</option>
+      <option value="Hold">Hold</option>
+    </select>
+  </label>
+  <label for="description">Description
+    <textarea name="description" id="description"></textarea>
+  </label>
+  <div class="form-example">
+    <input type="submit" value="Add technology">
+  </div>
+</form>

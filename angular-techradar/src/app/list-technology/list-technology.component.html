@@ -1,0 +1,13 @@
+@for (technology of technologies; track technology.id) {
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>{{technology.name}}</mat-card-title>
+      <mat-card-subtitle>Category: {{technology.category}}</mat-card-subtitle>
+      <mat-card-subtitle>Ring: {{technology.ring}}</mat-card-subtitle>
+      <mat-card-subtitle>What: {{technology.techDescription}}</mat-card-subtitle>
+      <mat-card-subtitle>Why: {{technology.whyDescription}}</mat-card-subtitle>
+      <mat-card-subtitle>Created: {{technology.creationDate}}</mat-card-subtitle>
+      <mat-card-subtitle>Publicated: {{technology.publicationDate}}</mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+}
