@@ -1,16 +1,116 @@
-@for (technology of technologies; track technology.id) {
-  @if (technology.status === this.Status.Published) {
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>{{ technology.name }}</mat-card-title>
-        <mat-card-subtitle>Category: {{ technology.category }}</mat-card-subtitle>
-        <mat-card-subtitle>Ring: {{ technology.ring }}</mat-card-subtitle>
-        <mat-card-subtitle>Technology Description: {{ technology.techDescription }}</mat-card-subtitle>
-        <mat-card-subtitle>Classification Description: {{ technology.classDescription }}</mat-card-subtitle>
-        <mat-card-subtitle>Status: {{ technology.status }}</mat-card-subtitle>
-        <mat-card-subtitle>Created: {{ technology.creationDate }}</mat-card-subtitle>
-        <mat-card-subtitle>Publicated: {{ technology.publicationDate }}</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
-  }
-}
+<table>
+  <caption>Techniques</caption>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Ring</th>
+    <th scope="col">Technology Description</th>
+    <th scope="col">Classification Description</th>
+    <th scope="col">Creation Date</th>
+    <th scope="col">Publication Date</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (technology of technologies; track technology.id) {
+      @if (technology.category === Category.Techniques && technology.status === this.Status.Published) {
+        <tr>
+          <th scope="row">{{ technology.id }}</th>
+          <td>{{ technology.name }}</td>
+          <td>{{ technology.ring }}</td>
+          <td>{{ technology.techDescription }}</td>
+          <td>{{ technology.classDescription }}</td>
+          <td>{{ technology.creationDate }}</td>
+          <td>{{ technology.publicationDate }}</td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+<table>
+  <caption>Tools</caption>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Ring</th>
+    <th scope="col">Technology Description</th>
+    <th scope="col">Classification Description</th>
+    <th scope="col">Creation Date</th>
+    <th scope="col">Publication Date</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (technology of technologies; track technology.id) {
+      @if (technology.category === Category.Tools && technology.status === this.Status.Published) {
+        <tr>
+          <th scope="row">{{ technology.id }}</th>
+          <td>{{ technology.name }}</td>
+          <td>{{ technology.ring }}</td>
+          <td>{{ technology.techDescription }}</td>
+          <td>{{ technology.classDescription }}</td>
+          <td>{{ technology.creationDate }}</td>
+          <td>{{ technology.publicationDate }}</td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+<table>
+  <caption>Platforms</caption>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Ring</th>
+    <th scope="col">Technology Description</th>
+    <th scope="col">Classification Description</th>
+    <th scope="col">Creation Date</th>
+    <th scope="col">Publication Date</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (technology of technologies; track technology.id) {
+      @if (technology.category === Category.Platforms && technology.status === this.Status.Published) {
+        <tr>
+          <th scope="row">{{ technology.id }}</th>
+          <td>{{ technology.name }}</td>
+          <td>{{ technology.ring }}</td>
+          <td>{{ technology.techDescription }}</td>
+          <td>{{ technology.classDescription }}</td>
+          <td>{{ technology.creationDate }}</td>
+          <td>{{ technology.publicationDate }}</td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>
+<table>
+  <caption>Languages & Framework</caption>
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Ring</th>
+    <th scope="col">Technology Description</th>
+    <th scope="col">Classification Description</th>
+    <th scope="col">Creation Date</th>
+    <th scope="col">Publication Date</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for (technology of technologies; track technology.id) {
+      @if (technology.category === Category.LanguagesAndFrameworks && technology.status === this.Status.Published) {
+        <tr>
+          <th scope="row">{{ technology.id }}</th>
+          <td>{{ technology.name }}</td>
+          <td>{{ technology.ring }}</td>
+          <td>{{ technology.techDescription }}</td>
+          <td>{{ technology.classDescription }}</td>
+          <td>{{ technology.creationDate }}</td>
+          <td>{{ technology.publicationDate }}</td>
+        </tr>
+      }
+    }
+  </tbody>
+</table>

@@ -3,6 +3,7 @@ import {Technology} from '../Technology';
 import {MatCardModule} from '@angular/material/card';
 import {Component} from '@angular/core';
 import {Status} from '../status';
+import {Category} from '../category';
 
 @Component({
   selector: 'app-list-technology',
@@ -32,4 +33,5 @@ export class ListTechnologyComponent {
   }
 
   protected readonly Status = Status;
+  protected readonly Category = Category;
 }
