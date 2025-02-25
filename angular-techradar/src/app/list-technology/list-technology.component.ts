@@ -9,6 +9,7 @@ import {Component} from '@angular/core';
     MatCardModule
   ],
   templateUrl: './list-technology.component.html',
+  standalone: true,
   styleUrl: './list-technology.component.scss'
 })
 export class ListTechnologyComponent {

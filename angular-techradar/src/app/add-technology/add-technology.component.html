@@ -1,33 +1,49 @@
-<form id="technology-form">
+<form [formGroup]="techForm" id="technology-form" (ngSubmit)="onSubmit()">
   <h1>Add a technology</h1>
   <div class="grid">
     <label for="name">Name
-      <input type="text" name="name" id="name" required>
+      <input type="text" name="name" id="name" formControlName="name" required>
     </label>
   </div>
   <label for="category">
     Category
-    <select name="category" id="category">
+    <select name="category" id="category" formControlName="category">
       <option value="">--Please choose a category--</option>
-      <option value="Tools">Tools</option>
-      <option value="Platforms">Platforms</option>
-      <option value="Frameworks">Frameworks</option>
-      <option value="Techniques">Techniques</option>
+      @for (icategory of allCategories; track icategory) {
+        <option value="{{icategory}}">{{ icategory }}</option>
+      }
     </select>
   </label>
   <label for="ring">Ring
-    <select name="ring" id="ring">
-      <option value="">--Please choose a category--</option>
-      <option value="Assess">Assess</option>
-      <option value="Trial">Trial</option>
-      <option value="Adopt">Adopt</option>
-      <option value="Hold">Hold</option>
+    <select name="ring" id="ring" formControlName="ring">
+      <option value="">--Please choose a ring--</option>
+      @for (iring of allRings; track iring) {
+        <option value="{{iring}}">{{ iring }}</option>
+      }
     </select>
   </label>
-  <label for="description">Description
-    <textarea name="description" id="description"></textarea>
+  <label for="techDescription">Technology Description
+    <textarea name="techDescription" id="techDescription" formControlName="techDescription"></textarea>
+  </label>
+  <label for="classDescription">Classification Description
+    <textarea name="classDescription" id="classDescription" formControlName="classDescription"></textarea>
+  </label>
+  <label for="status">Status
+    <select name="status" id="status" formControlName="status">
+      <option value="">--Please choose a status--</option>
+      @for (status of allStatus; track status) {
+        <option value="{{status}}">{{ status }}</option>
+      }
+    </select>
+  </label>
+  <label for="creationDate">Creation Date
+    <input type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
   </label>
   <div class="form-example">
-    <input type="submit" value="Add technology">
+    <input type="submit" value="Add technology" [disabled]="!techForm.valid">
+  </div>
+  <div>
+    <p>Show Values:</p>
+    <pre>{{ techForm.value | json }}</pre>
   </div>
 </form>
