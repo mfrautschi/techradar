@@ -2,6 +2,7 @@ import {TechnologyService} from '../technology.service';
 import {Technology} from '../Technology';
 import {MatCardModule} from '@angular/material/card';
 import {Component} from '@angular/core';
+import {Status} from '../status';
 
 @Component({
   selector: 'app-list-technology',
@@ -29,4 +30,6 @@ export class ListTechnologyComponent {
   async getTechnologyREST(){
     this.technologies = await this.technologyService.getTechnologiesREST();
   }
+
+  protected readonly Status = Status;
 }
