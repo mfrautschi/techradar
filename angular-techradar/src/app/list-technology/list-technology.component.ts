@@ -41,8 +41,6 @@ import {MatSort, MatSortHeader, Sort} from '@angular/material/sort';
   styleUrl: './list-technology.component.scss'
 })
 export class ListTechnologyComponent {
-  technologies: Technology[] = [];
-
   displayedColumns: string[] = ['id', 'name', 'category', 'ring', 'techDescription', 'classDescription', 'status', 'creationDate', 'publicationDate'];
   techniques: Technology[] = [];
   tools: Technology[] = [];
