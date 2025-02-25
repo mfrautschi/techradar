@@ -1,45 +1,47 @@
 <form [formGroup]="techForm" id="technology-form" (ngSubmit)="onSubmit()">
   <h1>Add a technology</h1>
-  <div class="grid">
-    <label for="name">Name
-      <input type="text" name="name" id="name" formControlName="name" required>
-    </label>
-  </div>
-  <label for="category">
-    Category
-    <select name="category" id="category" formControlName="category">
-      <option value="">--Please choose a category--</option>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput type="text" name="name" id="name" formControlName="name" required>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option value="">--Please choose a ring--</mat-option>
       @for (icategory of allCategories; track icategory) {
-        <option value="{{icategory}}">{{ icategory }}</option>
+        <mat-option value="{{icategory}}">{{ icategory }}</mat-option>
       }
-    </select>
-  </label>
-  <label for="ring">Ring
-    <select name="ring" id="ring" formControlName="ring">
-      <option value="">--Please choose a ring--</option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Ring</mat-label>
+    <mat-select formControlName="ring">
+      <mat-option value="">--Please choose a ring--</mat-option>
       @for (iring of allRings; track iring) {
-        <option value="{{iring}}">{{ iring }}</option>
+        <mat-option value="{{iring}}">{{ iring }}</mat-option>
       }
-    </select>
-  </label>
-  <label for="techDescription">Technology Description
-    <textarea name="techDescription" id="techDescription" formControlName="techDescription"></textarea>
-  </label>
-  <label for="classDescription">Classification Description
-    <textarea name="classDescription" id="classDescription" formControlName="classDescription"></textarea>
-  </label>
-  <label for="status">Status
-    <select name="status" id="status" formControlName="status">
-      <option value="">--Please choose a status--</option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Technology Description</mat-label>
+    <textarea matInput name="techDescription" id="techDescription" formControlName="techDescription"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Classification Description</mat-label>
+    <textarea matInput name="classDescription" id="classDescription" formControlName="classDescription"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option value="">--Please choose a ring--</mat-option>
       @for (status of allStatus; track status) {
-        <option value="{{status}}">{{ status }}</option>
+        <mat-option value="{{status}}">{{ status }}</mat-option>
       }
-    </select>
-  </label>
-  <label for="creationDate">Creation Date
-    <input type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
-  </label>
-  <div class="form-example">
-    <input type="submit" value="Add technology" [disabled]="!techForm.valid">
-  </div>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Creation Date</mat-label>
+    <input matInput type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
+  </mat-form-field>
+  <button mat-raised-button type="submit" [disabled]="!techForm.valid">Add technology</button>
 </form>

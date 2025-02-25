@@ -3,12 +3,15 @@ import {Status} from "../status";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Category} from '../category';
 import {Ring} from '../ring';
-import {JsonPipe} from '@angular/common';
 import {TechnologyService} from '../technology.service';
+import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {MatInput} from '@angular/material/input';
+import {MatOption, MatSelect} from '@angular/material/select';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-add-technology',
-  imports: [FormsModule, ReactiveFormsModule, JsonPipe],
+  imports: [FormsModule, ReactiveFormsModule, MatFormField, MatInput, MatLabel, MatSelect, MatOption, MatButton],
   templateUrl: './add-technology.component.html',
   standalone: true,
   styleUrl: './add-technology.component.scss'
