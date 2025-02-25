@@ -124,7 +124,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<table mat-table [dataSource]="dataSourceLanguagesAndFrameworks" matSort matSort #sortLanguagesAndFrameworks="matSort" class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSourceLanguagesAndFrameworks" matSort #sortLanguagesAndFrameworks="matSort" class="mat-elevation-z8">
   <caption>Languages and Frameworks</caption>
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>

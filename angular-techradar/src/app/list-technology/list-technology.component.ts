@@ -58,7 +58,7 @@ export class ListTechnologyComponent {
   }
 
   ngOnInit() {
-    this.getTechnologyREST().then(r => console.log('got data'));
+    this.getTechnologyREST().then(() => console.log('recieved data from backend'));
   }
 
   getTechnologies() {
