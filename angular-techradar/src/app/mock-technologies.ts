@@ -10,7 +10,7 @@ export const TECHNOLOGIES: Technology[] = [
     category: Category.LanguagesAndFrameworks,
     ring: Ring.Adopt,
     techDescription: 'A platform and framework for building single-page client applications using HTML and TypeScript.',
-    whyDescription: '',
+    classDescription: '',
     creationDate: new Date(),
     status: Status.Captured,
     publicationDate: new Date(new Date().setFullYear(1900, 1, 1))
@@ -21,7 +21,7 @@ export const TECHNOLOGIES: Technology[] = [
     category: Category.LanguagesAndFrameworks,
     ring: Ring.Trial,
     techDescription: 'A JavaScript library for building user interfaces.',
-    whyDescription: '',
+    classDescription: '',
     creationDate: new Date(),
     status: Status.Published,
     publicationDate: new Date()
@@ -32,7 +32,7 @@ export const TECHNOLOGIES: Technology[] = [
     category: Category.LanguagesAndFrameworks,
     ring: Ring.Assess,
     techDescription: 'A progressive framework for building user interfaces.',
-    whyDescription: '',
+    classDescription: '',
     creationDate: new Date(),
     status: Status.Captured,
     publicationDate: new Date(new Date().setFullYear(1900, 1, 1))
@@ -43,7 +43,7 @@ export const TECHNOLOGIES: Technology[] = [
     category: Category.Platforms,
     ring: Ring.Hold,
     techDescription: 'An open platform for developing, shipping, and running applications.',
-    whyDescription: '',
+    classDescription: '',
     creationDate: new Date(),
     status: Status.Published,
     publicationDate: new Date()

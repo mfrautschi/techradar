@@ -8,8 +8,8 @@ export interface Technology{
   category: Category,
   ring: Ring,
   techDescription: string,
-  whyDescription: string,
-  creationDate: Date,
+  classDescription: string,
   status: Status,
+  creationDate: Date,
   publicationDate: Date
 }
