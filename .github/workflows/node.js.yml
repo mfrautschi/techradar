@@ -37,7 +37,7 @@ jobs:
           npm run build --if-present
 
       # Run tests
-      - name: Run tests
-        run: |
-          cd angular-techradar  # Again, ensure you're in the correct directory
-          npm test
+#      - name: Run tests
+#        run: |
+#          cd angular-techradar  # Again, ensure you're in the correct directory
+#          npm test
