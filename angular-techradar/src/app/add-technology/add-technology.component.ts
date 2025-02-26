@@ -81,20 +81,22 @@ export class AddTechnologyComponent {
   }
 
   publishTechnology() {
-    this.techForm.patchValue({ publicationDate: this.formatDateTime(new Date()) });
-    this.technologyService.addTechnology(this.techForm);
+    this.techForm.patchValue({publicationDate: this.formatDateTime(new Date())});
+    this.technologyService.addTechnology(this.techForm).then(() => {
+      this.technologyService.fetchTechnologies();
+    });
     console.log("PUBLISH")
-    this.logTechform();
   }
 
   publishDraft() {
-    this.techForm.patchValue({ publicationDate: '' });
-    this.technologyService.addTechnology(this.techForm);
+    this.techForm.patchValue({publicationDate: ''});
+    this.technologyService.addTechnology(this.techForm).then(() => {
+      this.technologyService.fetchTechnologies();
+    });
     console.log("DRAFT")
-    this.logTechform();
   }
 
-  logTechform(){
+  logTechform() {
     console.log('Name: ' + this.techForm.value.name);
     console.log('Category: ' + this.techForm.value.category);
     console.log('Ring: ' + this.techForm.value.ring);

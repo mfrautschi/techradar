@@ -1,24 +1,35 @@
 import {Injectable} from '@angular/core';
-import {of} from 'rxjs';
-import {TECHNOLOGIES} from './mock-technologies';
 import {FormControl, FormGroup} from '@angular/forms';
+import {catchError, Observable, Subject} from 'rxjs';
+import {Technology} from './Technology';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TechnologyService {
   private readonly url = 'https://67a1da79409de5ed52534a89.mockapi.io/api/v1/technologies';
+  private readonly technologiesSubject = new Subject<Technology[]>();
 
-  constructor() {
+  constructor(private readonly httpClient: HttpClient) {
   }
 
-  getTechnologies() {
-    return of(TECHNOLOGIES);
+  getTechnologiesREST(): Observable<Technology[]> {
+    return this.httpClient.get<Technology[]>(this.url)
+      .pipe(catchError((error) => {
+        console.error('Error fetching technologies', error);
+        throw error;
+      }));
   }
 
-  async getTechnologiesREST() {
-    const response = await fetch(this.url);
-    return response.json();
+  fetchTechnologies() {
+    this.getTechnologiesREST().subscribe((techs) => {
+      this.technologiesSubject.next(techs);
+    })
+  }
+
+  getTechnologies(): Observable<Technology[]> {
+    return this.technologiesSubject.asObservable();
   }
 
   addTechnology(techForm: FormGroup<{
@@ -30,14 +41,13 @@ export class TechnologyService {
     status: FormControl<string | null>;
     creationDate: FormControl<string | null>;
     publicationDate: FormControl<string | null>;
-  }>) {
-
-    fetch(this.url, {
+  }>) : Promise<Technology> {
+    return fetch(this.url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(techForm.getRawValue())
-    }).then(r => r.json()).then(r => console.log(r));
+    }).then(r => r.json());
   }
 }
