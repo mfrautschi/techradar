@@ -56,14 +56,20 @@ export class ListTechnologyComponent {
   }
 
   ngOnInit() {
-    this.getTechnologyREST().then(() => console.log('recieved data from backend'));
-  }
-
-  getTechnologies() {
-    this.technologyService.getTechnologies().subscribe(techs => this.splitTechnologies(techs));
+    this.technologyService.getTechnologies().subscribe((techs: Technology[]) => {
+      this.splitTechnologies(techs);
+    });
+    this.technologyService.fetchTechnologies();
   }
 
   splitTechnologies(techs: Technology[]) {
+    console.log('received technologies');
+
+    this.techniques = [];
+    this.tools = [];
+    this.platforms = [];
+    this.languagesAndFrameworks = [];
+
     techs.filter(t => t.status === Status.Published).forEach(tech => {
       switch (tech.category) {
         case Category.Techniques:
@@ -85,14 +91,6 @@ export class ListTechnologyComponent {
     this.dataSourceTools.data = this.tools;
     this.dataSourcePlatforms.data = this.platforms;
     this.dataSourceLanguagesAndFrameworks.data = this.languagesAndFrameworks;
-    console.table(this.techniques);
-    console.table(this.tools);
-    console.table(this.platforms);
-    console.table(this.languagesAndFrameworks);
-  }
-
-  async getTechnologyREST() {
-    this.splitTechnologies(await this.technologyService.getTechnologiesREST());
   }
 
   protected readonly Status = Status;
