@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,12 +14,30 @@ jobs:
         node-version: [22.x]
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm install
-    - run: npm run build --if-present
-    - run: npm test
+      # Checkout the repository, with the correct subdirectory where your project is
+      - uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Change directory to where your angular-techradar project is located
+      - name: Install dependencies
+        run: |
+          cd angular-techradar  # Change to the directory where package-lock.json is located
+          npm install           # Install dependencies
+
+      # Build the project
+      - name: Run build
+        run: |
+          cd angular-techradar  # Change to the correct directory
+          npm run build --if-present
+
+      # Run tests
+      - name: Run tests
+        run: |
+          cd angular-techradar  # Again, ensure you're in the correct directory
+          npm test
