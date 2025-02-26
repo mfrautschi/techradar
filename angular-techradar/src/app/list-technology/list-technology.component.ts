@@ -93,9 +93,6 @@ export class ListTechnologyComponent {
     this.dataSourceLanguagesAndFrameworks.data = this.languagesAndFrameworks;
   }
 
-  protected readonly Status = Status;
-  protected readonly Category = Category;
-
   @ViewChild('sortTechniques') sortTechniques: MatSort = {} as MatSort;
   @ViewChild('sortTools') sortTools: MatSort = {} as MatSort;
   @ViewChild('sortPlatforms') sortPlatforms: MatSort = {} as MatSort;
@@ -103,9 +100,30 @@ export class ListTechnologyComponent {
 
   ngAfterViewInit() {
     this.dataSourceTechniques.sort = this.sortTechniques;
+    this.dataSourceTechniques.sortingDataAccessor = (item, property) => {
+      if (property === 'ring') {
+        return ringOrder[item.ring] || 999;
+      }
+      // @ts-ignore
+      return item[property];
+    };
+    this.dataSourceTechniques.sort.active = 'ring';
+    this.dataSourceTechniques.sort.direction = 'asc';
+
     this.dataSourceTools.sort = this.sortTools;
+    this.dataSourceTools.sortingDataAccessor = this.dataSourceTechniques.sortingDataAccessor;
+    this.dataSourceTools.sort.active = 'ring';
+    this.dataSourceTools.sort.direction = 'asc';
+
     this.dataSourcePlatforms.sort = this.sortPlatforms;
+    this.dataSourcePlatforms.sortingDataAccessor = this.dataSourceTechniques.sortingDataAccessor;
+    this.dataSourcePlatforms.sort.active = 'ring';
+    this.dataSourcePlatforms.sort.direction = 'asc';
+
     this.dataSourceLanguagesAndFrameworks.sort = this.sortLanguagesAndFrameworks;
+    this.dataSourceLanguagesAndFrameworks.sortingDataAccessor = this.dataSourceTechniques.sortingDataAccessor;
+    this.dataSourceLanguagesAndFrameworks.sort.active = 'ring';
+    this.dataSourceLanguagesAndFrameworks.sort.direction = 'asc';
   }
 
   announceSort(sortState: Sort) {
@@ -116,3 +134,10 @@ export class ListTechnologyComponent {
     }
   }
 }
+
+const ringOrder: { [key: string]: number } = {
+  'Adopt': 1,
+  'Trial': 2,
+  'Assess': 3,
+  'Hold': 4
+};
