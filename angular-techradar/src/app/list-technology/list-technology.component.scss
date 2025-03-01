@@ -39,3 +39,8 @@ tfoot th {
 tfoot td {
   font-weight: bold;
 }
+
+.cdk-row:hover {
+  background-color: #ffff99;
+  cursor: pointer;
+}
