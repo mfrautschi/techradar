@@ -1,7 +1,7 @@
 import {TechnologyService} from '../technology.service';
 import {Technology} from '../Technology';
 import {MatCardModule} from '@angular/material/card';
-import {Component, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {Status} from '../status';
 import {Category} from '../category';
 import {
@@ -18,6 +18,7 @@ import {
   MatTableDataSource
 } from '@angular/material/table';
 import {MatSort, MatSortHeader, Sort} from '@angular/material/sort';
+import {NgClass} from '@angular/common';
 
 @Component({
   selector: 'app-list-technology',
@@ -34,13 +35,23 @@ import {MatSort, MatSortHeader, Sort} from '@angular/material/sort';
     MatHeaderRowDef,
     MatRow,
     MatSortHeader,
-    MatSort
+    MatSort,
+    NgClass
   ],
   templateUrl: './list-technology.component.html',
   standalone: true,
   styleUrl: './list-technology.component.scss'
 })
 export class ListTechnologyComponent {
+  @Input() mode: string = 'view';
+  @Output() technologyAdded = new EventEmitter<Technology>();
+
+  selectTechnology(technology: Technology) {
+    if(technology){
+      this.technologyAdded.emit(technology);
+    }
+  }
+
   displayedColumns: string[] = ['id', 'name', 'category', 'ring', 'techDescription', 'classDescription', 'status', 'creationDate', 'publicationDate'];
   techniques: Technology[] = [];
   tools: Technology[] = [];
@@ -60,11 +71,10 @@ export class ListTechnologyComponent {
       this.splitTechnologies(techs);
     });
     this.technologyService.fetchTechnologies();
+    console.log('# mode ' + this.mode);
   }
 
   splitTechnologies(techs: Technology[]) {
-    console.log('received technologies');
-
     this.techniques = [];
     this.tools = [];
     this.platforms = [];
@@ -132,6 +142,10 @@ export class ListTechnologyComponent {
     } else {
       console.log('Sorting cleared');
     }
+  }
+
+  isAdministrationMode() {
+    return this.mode === 'admin';
   }
 }
 

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {Status} from "../status";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Category} from '../category';
@@ -8,6 +8,7 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatInput} from '@angular/material/input';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {MatButton} from '@angular/material/button';
+import {Technology} from '../Technology';
 
 @Component({
   selector: 'app-add-technology',
@@ -16,8 +17,16 @@ import {MatButton} from '@angular/material/button';
   standalone: true,
   styleUrl: './add-technology.component.scss'
 })
-export class AddTechnologyComponent {
+export class AddTechnologyComponent implements OnChanges{
   constructor(private readonly technologyService: TechnologyService) {
+  }
+
+  @Input() selectedTechnology: Technology | null = null;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['selectedTechnology']?.currentValue) {
+      console.log('Child changed', changes['selectedTechnology'].currentValue);
+    }
   }
 
   techForm = new FormGroup({
