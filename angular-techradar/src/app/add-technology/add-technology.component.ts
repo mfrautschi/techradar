@@ -26,7 +26,6 @@ export class AddTechnologyComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedTechnology']?.currentValue) {
-      console.log('Child changed', changes['selectedTechnology'].currentValue);
       this.techForm.patchValue(changes['selectedTechnology'].currentValue);
       this.changeTechnology = true;
     }
@@ -117,7 +116,7 @@ export class AddTechnologyComponent implements OnChanges {
   }
 
   updateTechnology() {
-    // TODO: Implement updateTechnology
+    this.technologyService.updateTechnology(this.techForm).then(() => this.techForm.reset());
     this.changeTechnology = false;
   }
 

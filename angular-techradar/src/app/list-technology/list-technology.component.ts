@@ -17,7 +17,7 @@ import {
   MatTable,
   MatTableDataSource
 } from '@angular/material/table';
-import {MatSort, MatSortHeader, Sort} from '@angular/material/sort';
+import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {NgClass} from '@angular/common';
 
 @Component({
@@ -134,14 +134,6 @@ export class ListTechnologyComponent {
     this.dataSourceLanguagesAndFrameworks.sortingDataAccessor = this.dataSourceTechniques.sortingDataAccessor;
     this.dataSourceLanguagesAndFrameworks.sort.active = 'ring';
     this.dataSourceLanguagesAndFrameworks.sort.direction = 'asc';
-  }
-
-  announceSort(sortState: Sort) {
-    if (sortState.direction) {
-      console.log(`Sorted ${sortState.direction}ending`);
-    } else {
-      console.log('Sorting cleared');
-    }
   }
 
   isAdministrationMode() {

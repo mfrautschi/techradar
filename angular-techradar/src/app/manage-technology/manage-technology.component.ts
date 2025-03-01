@@ -10,6 +10,7 @@ import {Technology} from '../Technology';
     ListTechnologyComponent
   ],
   templateUrl: './manage-technology.component.html',
+  standalone: true,
   styleUrl: './manage-technology.component.scss'
 })
 export class ManageTechnologyComponent {
@@ -18,6 +19,5 @@ export class ManageTechnologyComponent {
 
   onTechnologySelected(technology: Technology){
     this.selectedTechnology = technology;
-    console.log('Parent received technology: ', technology);
   }
 }
