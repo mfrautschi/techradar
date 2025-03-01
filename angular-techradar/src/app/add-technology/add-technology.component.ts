@@ -17,7 +17,7 @@ import {Technology} from '../Technology';
   standalone: true,
   styleUrl: './add-technology.component.scss'
 })
-export class AddTechnologyComponent implements OnChanges{
+export class AddTechnologyComponent implements OnChanges {
   constructor(private readonly technologyService: TechnologyService) {
   }
 
@@ -25,7 +25,7 @@ export class AddTechnologyComponent implements OnChanges{
   changeTechnology: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes['selectedTechnology']?.currentValue) {
+    if (changes['selectedTechnology']?.currentValue) {
       console.log('Child changed', changes['selectedTechnology'].currentValue);
       this.techForm.patchValue(changes['selectedTechnology'].currentValue);
       this.changeTechnology = true;
@@ -33,7 +33,7 @@ export class AddTechnologyComponent implements OnChanges{
   }
 
   techForm = new FormGroup({
-    id: new FormControl({value: '', disabled: true}, ),
+    id: new FormControl({value: '', disabled: true},),
     name: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
     ring: new FormControl(''),
@@ -58,18 +58,22 @@ export class AddTechnologyComponent implements OnChanges{
   allStatus = Object.values(Status);
 
   onSubmit() {
-    if(this.changeTechnology) {
+    if (this.changeTechnology) {
       this.updateTechnology();
     } else {
-    if (this.techForm.value.status === Status.Published && this.validatePublishForm()) {
-      console.log("Technology valid to publish: " + JSON.stringify(this.techForm.value));
-      this.publishTechnology();
-    } else if (this.techForm.value.status === Status.Captured && this.validateDraftForm()) {
-      console.log("Technology valid to draft: " + JSON.stringify(this.techForm.value));
-      this.publishDraft();
-    } else {
-      console.log("Technology not valid to publish or draft: " + JSON.stringify(this.techForm.value));
-    }}
+      this.techForm.patchValue({creationDate: this.formatDateTime(new Date())});
+      if (this.techForm.value.status === Status.Published && this.validatePublishForm()) {
+        console.log("Technology valid to publish: " + JSON.stringify(this.techForm.value));
+        this.publishTechnology();
+        this.techForm.reset();
+      } else if (this.techForm.value.status === Status.Captured && this.validateDraftForm()) {
+        console.log("Technology valid to draft: " + JSON.stringify(this.techForm.value));
+        this.publishDraft();
+        this.techForm.reset();
+      } else {
+        console.log("Technology not valid to publish or draft: " + JSON.stringify(this.techForm.value));
+      }
+    }
   }
 
   validateDraftForm() {
@@ -122,7 +126,7 @@ export class AddTechnologyComponent implements OnChanges{
     this.changeTechnology = false;
   }
 
-  cancel(){
+  cancel() {
     this.techForm.reset();
     this.changeTechnology = false;
   }

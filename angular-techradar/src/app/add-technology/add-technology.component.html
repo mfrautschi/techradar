@@ -45,10 +45,12 @@
       }
     </mat-select>
   </mat-form-field>
-  <mat-form-field>
-    <mat-label>Creation Date</mat-label>
-    <input matInput type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
-  </mat-form-field>
+  @if (changeTechnology) {
+    <mat-form-field>
+      <mat-label>Creation Date</mat-label>
+      <input matInput type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
+    </mat-form-field>
+  }
   <button mat-raised-button type="submit" [disabled]="!techForm.valid">
     @if (changeTechnology) {
       Save changes
