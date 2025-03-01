@@ -19,6 +19,7 @@ import {
 } from '@angular/material/table';
 import {MatSort, MatSortHeader} from '@angular/material/sort';
 import {NgClass} from '@angular/common';
+import {DraftHighlightDirective} from '../draft-highlight.directive';
 
 @Component({
   selector: 'app-list-technology',
@@ -36,7 +37,8 @@ import {NgClass} from '@angular/common';
     MatRow,
     MatSortHeader,
     MatSort,
-    NgClass
+    NgClass,
+    DraftHighlightDirective
   ],
   templateUrl: './list-technology.component.html',
   standalone: true,

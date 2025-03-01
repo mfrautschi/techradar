@@ -37,7 +37,7 @@
     <td mat-cell *matCellDef="let technology">{{ technology.publicationDate }}</td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectTechnology(row)"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selectTechnology(row)" [appDraftHighlight]="row.status" ></tr>
 </table>
 
 <table mat-table [dataSource]="dataSourceTools" matSort #sortTools="matSort" class="mat-elevation-z8" >
