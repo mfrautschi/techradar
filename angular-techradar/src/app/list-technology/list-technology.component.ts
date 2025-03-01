@@ -80,22 +80,41 @@ export class ListTechnologyComponent {
     this.platforms = [];
     this.languagesAndFrameworks = [];
 
-    techs.filter(t => t.status === Status.Published).forEach(tech => {
-      switch (tech.category) {
-        case Category.Techniques:
-          this.techniques.push(tech);
-          break;
-        case Category.Tools:
-          this.tools.push(tech);
-          break;
-        case Category.Platforms:
-          this.platforms.push(tech);
-          break;
-        case Category.LanguagesAndFrameworks:
-          this.languagesAndFrameworks.push(tech);
-          break;
-      }
-    });
+    if (this.mode === 'view') {
+      techs.filter(t => t.status === Status.Published).forEach(tech => {
+        switch (tech.category) {
+          case Category.Techniques:
+            this.techniques.push(tech);
+            break;
+          case Category.Tools:
+            this.tools.push(tech);
+            break;
+          case Category.Platforms:
+            this.platforms.push(tech);
+            break;
+          case Category.LanguagesAndFrameworks:
+            this.languagesAndFrameworks.push(tech);
+            break;
+        }
+      });
+    } else {
+      techs.forEach(tech => {
+        switch (tech.category) {
+          case Category.Techniques:
+            this.techniques.push(tech);
+            break;
+          case Category.Tools:
+            this.tools.push(tech);
+            break;
+          case Category.Platforms:
+            this.platforms.push(tech);
+            break;
+          case Category.LanguagesAndFrameworks:
+            this.languagesAndFrameworks.push(tech);
+            break;
+        }
+      });
+    }
 
     this.dataSourceTechniques.data = this.techniques;
     this.dataSourceTools.data = this.tools;
