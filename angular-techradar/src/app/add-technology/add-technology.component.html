@@ -1,5 +1,11 @@
 <form [formGroup]="techForm" id="technology-form" (ngSubmit)="onSubmit()">
   <h1>Add a technology</h1>
+  @if (changeTechnology) {
+    <mat-form-field>
+      <mat-label>ID</mat-label>
+      <input matInput type="text" name="id" id="id" formControlName="id">
+    </mat-form-field>
+  }
   <mat-form-field>
     <mat-label>Name</mat-label>
     <input matInput type="text" name="name" id="name" formControlName="name" required>
@@ -43,5 +49,14 @@
     <mat-label>Creation Date</mat-label>
     <input matInput type="datetime-local" name="creationDate" id="creationDate" formControlName="creationDate">
   </mat-form-field>
-  <button mat-raised-button type="submit" [disabled]="!techForm.valid">Add technology</button>
+  <button mat-raised-button type="submit" [disabled]="!techForm.valid">
+    @if (changeTechnology) {
+      Save changes
+    } @else {
+      Add technology
+    }</button>
+  @if (changeTechnology) {
+    <button mat-raised-button type="button" (click)="deleteTechnology()">Delete technology</button>
+    <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
+  }
 </form>

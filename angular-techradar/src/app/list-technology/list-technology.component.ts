@@ -47,7 +47,7 @@ export class ListTechnologyComponent {
   @Output() technologyAdded = new EventEmitter<Technology>();
 
   selectTechnology(technology: Technology) {
-    if(technology){
+    if (technology) {
       this.technologyAdded.emit(technology);
     }
   }

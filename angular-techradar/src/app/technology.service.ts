@@ -33,7 +33,8 @@ export class TechnologyService {
     return this.technologiesSubject.asObservable();
   }
 
-  addTechnology(techForm: FormGroup<{
+  async addTechnology(techForm: FormGroup<{
+    id: FormControl<string | null>;
     name: FormControl<string | null>;
     category: FormControl<string | null>;
     ring: FormControl<string | null>;
@@ -41,14 +42,47 @@ export class TechnologyService {
     classDescription: FormControl<string | null>;
     status: FormControl<string | null>;
     creationDate: FormControl<string | null>;
-    publicationDate: FormControl<string | null>;
-  }>) : Promise<Technology> {
-    return fetch(this.url, {
+    publicationDate: FormControl<string | null>
+  }>): Promise<Technology> {
+    const r = await fetch(this.url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(techForm.getRawValue())
-    }).then(r => r.json());
+    });
+    return await r.json();
+  }
+
+  deleteTechnology(techForm: FormGroup<{
+    id: FormControl<string | null>;
+    name: FormControl<string | null>;
+    category: FormControl<string | null>;
+    ring: FormControl<string | null>;
+    techDescription: FormControl<string | null>;
+    classDescription: FormControl<string | null>;
+    status: FormControl<string | null>;
+    creationDate: FormControl<string | null>;
+    publicationDate: FormControl<string | null>
+  }>) {
+
+    const technologyId = techForm.getRawValue().id;
+    console.log('service delete', techForm.getRawValue().id);
+    console.log('uri delete', `${this.url}/${technologyId}`);
+
+    return fetch(`${this.url}/${technologyId}`,{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      if(!response.ok){
+        throw new Error('Failed to delete technology');
+      }
+      this.fetchTechnologies();
+      console.log(response.text);
+    }).catch(error => {
+      console.error(`Error deleting technology ${technologyId}`, error);
+    })
   }
 }

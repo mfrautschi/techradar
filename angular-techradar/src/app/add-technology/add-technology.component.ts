@@ -22,14 +22,18 @@ export class AddTechnologyComponent implements OnChanges{
   }
 
   @Input() selectedTechnology: Technology | null = null;
+  changeTechnology: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['selectedTechnology']?.currentValue) {
       console.log('Child changed', changes['selectedTechnology'].currentValue);
+      this.techForm.patchValue(changes['selectedTechnology'].currentValue);
+      this.changeTechnology = true;
     }
   }
 
   techForm = new FormGroup({
+    id: new FormControl({value: '', disabled: true}, ),
     name: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
     ring: new FormControl(''),
@@ -54,6 +58,9 @@ export class AddTechnologyComponent implements OnChanges{
   allStatus = Object.values(Status);
 
   onSubmit() {
+    if(this.changeTechnology) {
+      this.updateTechnology();
+    } else {
     if (this.techForm.value.status === Status.Published && this.validatePublishForm()) {
       console.log("Technology valid to publish: " + JSON.stringify(this.techForm.value));
       this.publishTechnology();
@@ -62,7 +69,7 @@ export class AddTechnologyComponent implements OnChanges{
       this.publishDraft();
     } else {
       console.log("Technology not valid to publish or draft: " + JSON.stringify(this.techForm.value));
-    }
+    }}
   }
 
   validateDraftForm() {
@@ -103,6 +110,21 @@ export class AddTechnologyComponent implements OnChanges{
       this.technologyService.fetchTechnologies();
     });
     console.log("DRAFT")
+  }
+
+  updateTechnology() {
+    // TODO: Implement updateTechnology
+    this.changeTechnology = false;
+  }
+
+  deleteTechnology() {
+    this.technologyService.deleteTechnology(this.techForm).then(() => this.techForm.reset());
+    this.changeTechnology = false;
+  }
+
+  cancel(){
+    this.techForm.reset();
+    this.changeTechnology = false;
   }
 
   logTechform() {
