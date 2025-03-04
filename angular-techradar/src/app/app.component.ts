@@ -1,12 +1,19 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {ManageTechnologyComponent} from './manage-technology/manage-technology.component';
+import {Component} from '@angular/core';
+import {RouterOutlet} from '@angular/router';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from './auth.interceptor';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ManageTechnologyComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  styleUrl: './app.component.scss',
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }]
 })
 export class AppComponent {
   title = 'angular-techradar';

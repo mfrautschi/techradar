@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {catchError, Observable, Subject} from 'rxjs';
 import {Technology} from './Technology';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,17 @@ export class TechnologyService {
   constructor(private readonly httpClient: HttpClient) {
   }
 
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
   getTechnologiesREST(): Observable<Technology[]> {
-    return this.httpClient.get<Technology[]>(this.url)
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+
+    return this.httpClient.get<Technology[]>(this.url, {headers})
       .pipe(catchError((error) => {
         console.error('Error fetching technologies', error);
         throw error;
@@ -47,7 +56,8 @@ export class TechnologyService {
     const r = await fetch(this.url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.getToken()}`
       },
       body: JSON.stringify(techForm.getRawValue())
     });
@@ -70,7 +80,8 @@ export class TechnologyService {
       const response = await fetch(`${this.url}/${technologyId}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.getToken()}`
         },
         body: JSON.stringify(techForm.getRawValue())
       });
@@ -101,7 +112,8 @@ export class TechnologyService {
       const response = await fetch(`${this.url}/${technologyId}`, {
         method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.getToken()}`
         }
       });
       if (!response.ok) {

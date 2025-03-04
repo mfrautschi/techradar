@@ -1,2 +1,4 @@
-<app-add-technology [selectedTechnology]="selectedTechnology"></app-add-technology>
+@if (listMode === 'administration') {
+  <app-add-technology [selectedTechnology]="selectedTechnology"></app-add-technology>
+}
 <app-list-technology [mode]="listMode" (technologyAdded)="onTechnologySelected($event)"></app-list-technology>

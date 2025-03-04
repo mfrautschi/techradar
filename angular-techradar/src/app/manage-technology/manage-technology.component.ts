@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AddTechnologyComponent} from '../add-technology/add-technology.component';
 import {ListTechnologyComponent} from '../list-technology/list-technology.component';
 import {Technology} from '../Technology';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-manage-technology',
@@ -13,11 +14,22 @@ import {Technology} from '../Technology';
   standalone: true,
   styleUrl: './manage-technology.component.scss'
 })
-export class ManageTechnologyComponent {
+export class ManageTechnologyComponent implements OnInit {
   listMode: string = 'administration';
   selectedTechnology: Technology | null = null;
 
-  onTechnologySelected(technology: Technology){
+  constructor(private readonly authService: AuthService) {
+  }
+
+  ngOnInit() {
+    if (this.authService.isAdministrator()) {
+      this.listMode = 'administration';
+    } else {
+      this.listMode = 'view';
+    }
+  }
+
+  onTechnologySelected(technology: Technology) {
     this.selectedTechnology = technology;
   }
 }
