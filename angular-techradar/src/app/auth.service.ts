@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,7 @@ export class AuthService {
   private token: string | null = null;
   private readonly loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isLoggedIn());
 
-  constructor(private readonly http: HttpClient, private readonly router: Router) {
-    // Initialisiere das Token aus dem lokalen Speicher
+  constructor(private readonly http: HttpClient) {
     this.token = localStorage.getItem('auth_token');
   }
 
@@ -31,13 +29,6 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('auth_token');
-  }
-
-  logout(): void {
-    this.token = null;
-    localStorage.removeItem('auth_token');
-    this.loggedInSubject.next(false);
-    this.router.navigate(['/login']);
   }
 
   getToken(): string | null {

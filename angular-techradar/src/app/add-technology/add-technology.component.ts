@@ -129,15 +129,4 @@ export class AddTechnologyComponent implements OnChanges {
     this.techForm.reset();
     this.changeTechnology = false;
   }
-
-  logTechform() {
-    console.log('Name: ' + this.techForm.value.name);
-    console.log('Category: ' + this.techForm.value.category);
-    console.log('Ring: ' + this.techForm.value.ring);
-    console.log('Tech Description: ' + this.techForm.value.techDescription);
-    console.log('Class Description: ' + this.techForm.value.classDescription);
-    console.log('Status: ' + this.techForm.value.status);
-    console.log('Creation Date: ' + this.techForm.getRawValue().creationDate);
-    console.log('Publication Date: ' + this.techForm.getRawValue().publicationDate);
-  }
 }
