@@ -116,6 +116,9 @@ export class AddTechnologyComponent implements OnChanges {
   }
 
   updateTechnology() {
+    if (this.techForm.value.publicationDate?.trim().length === 0) {
+      this.techForm.patchValue({publicationDate: this.formatDateTime(new Date())});
+    }
     this.technologyService.updateTechnology(this.techForm).then(() => this.techForm.reset());
     this.changeTechnology = false;
   }
