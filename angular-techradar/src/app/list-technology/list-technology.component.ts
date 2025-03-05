@@ -1,7 +1,7 @@
 import {TechnologyService} from '../technology.service';
 import {Technology} from '../Technology';
 import {MatCardModule} from '@angular/material/card';
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Status} from '../status';
 import {Category} from '../category';
 import {
@@ -44,7 +44,7 @@ import {DraftHighlightDirective} from '../draft-highlight.directive';
   standalone: true,
   styleUrl: './list-technology.component.scss'
 })
-export class ListTechnologyComponent {
+export class ListTechnologyComponent implements OnInit {
   @Input() mode: string = 'view';
   @Output() technologyAdded = new EventEmitter<Technology>();
 
