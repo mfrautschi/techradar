@@ -1,15 +1,17 @@
 <div class="login-container">
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input [(ngModel)]="username" class="form-control" id="username" name="username" required type="text"/>
-    </div>
+  <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="username" matInput required type="text"/>
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input [(ngModel)]="password" class="form-control" id="password" name="password" required type="password"/>
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput required type="password"/>
+    </mat-form-field>
 
-    <button class="btn btn-primary" type="submit">Login</button>
+    <button [disabled]="loginForm.invalid" color="primary" mat-raised-button type="submit">
+      Login
+    </button>
   </form>
 </div>
