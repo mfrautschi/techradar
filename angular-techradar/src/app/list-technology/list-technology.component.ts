@@ -73,7 +73,6 @@ export class ListTechnologyComponent implements OnInit {
       this.splitTechnologies(techs);
     });
     this.technologyService.fetchTechnologies();
-    console.log('# mode ' + this.mode);
   }
 
   splitTechnologies(techs: Technology[]) {

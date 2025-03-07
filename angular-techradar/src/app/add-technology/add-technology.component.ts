@@ -62,15 +62,13 @@ export class AddTechnologyComponent implements OnChanges {
     } else {
       this.techForm.patchValue({creationDate: this.formatDateTime(new Date())});
       if (this.techForm.value.status === Status.Published && this.validatePublishForm()) {
-        console.log("Technology valid to publish: " + JSON.stringify(this.techForm.value));
         this.publishTechnology();
         this.techForm.reset();
       } else if (this.techForm.value.status === Status.Captured && this.validateDraftForm()) {
-        console.log("Technology valid to draft: " + JSON.stringify(this.techForm.value));
         this.publishDraft();
         this.techForm.reset();
       } else {
-        console.log("Technology not valid to publish or draft: " + JSON.stringify(this.techForm.value));
+        console.error("Technology not valid to publish or draft: " + JSON.stringify(this.techForm.value));
       }
     }
   }
@@ -104,7 +102,6 @@ export class AddTechnologyComponent implements OnChanges {
     this.technologyService.addTechnology(this.techForm).then(() => {
       this.technologyService.fetchTechnologies();
     });
-    console.log("PUBLISH")
   }
 
   publishDraft() {
@@ -112,7 +109,6 @@ export class AddTechnologyComponent implements OnChanges {
     this.technologyService.addTechnology(this.techForm).then(() => {
       this.technologyService.fetchTechnologies();
     });
-    console.log("DRAFT")
   }
 
   updateTechnology() {

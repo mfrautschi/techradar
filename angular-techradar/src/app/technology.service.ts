@@ -88,7 +88,6 @@ export class TechnologyService {
         throw new Error('Failed to update technology');
       }
       this.fetchTechnologies();
-      console.log(response.text);
     } catch (error) {
       console.error(`Error deleting technology ${technologyId}`, error);
     }
@@ -106,7 +105,6 @@ export class TechnologyService {
     publicationDate: FormControl<string | null>
   }>) {
     const technologyId = techForm.getRawValue().id;
-    console.log('uri delete', `${this.url}/${technologyId}`);
     try {
       const response = await fetch(`${this.url}/${technologyId}`, {
         method: 'DELETE',
@@ -119,7 +117,6 @@ export class TechnologyService {
         throw new Error('Failed to delete technology');
       }
       this.fetchTechnologies();
-      console.log(response.text);
     } catch (error) {
       console.error(`Error deleting technology ${technologyId}`, error);
     }
